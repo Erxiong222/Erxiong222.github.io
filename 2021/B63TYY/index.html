@@ -20,25 +20,31 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
 <script class="next-config" data-name="main" type="application/json">{&quot;hostname&quot;:&quot;www.jaly.xyz&quot;,&quot;root&quot;:&quot;&#x2F;&quot;,&quot;images&quot;:&quot;&#x2F;images&quot;,&quot;scheme&quot;:&quot;Gemini&quot;,&quot;version&quot;:&quot;8.5.0&quot;,&quot;exturl&quot;:false,&quot;sidebar&quot;:{&quot;position&quot;:&quot;left&quot;,&quot;display&quot;:&quot;always&quot;,&quot;padding&quot;:18,&quot;offset&quot;:20},&quot;copycode&quot;:false,&quot;bookmark&quot;:{&quot;enable&quot;:false,&quot;color&quot;:&quot;#222&quot;,&quot;save&quot;:&quot;auto&quot;},&quot;fancybox&quot;:false,&quot;mediumzoom&quot;:false,&quot;lazyload&quot;:false,&quot;pangu&quot;:false,&quot;comments&quot;:{&quot;style&quot;:&quot;tabs&quot;,&quot;active&quot;:null,&quot;storage&quot;:true,&quot;lazyload&quot;:false,&quot;nav&quot;:null},&quot;motion&quot;:{&quot;enable&quot;:true,&quot;async&quot;:false,&quot;transition&quot;:{&quot;post_block&quot;:&quot;fadeIn&quot;,&quot;post_header&quot;:&quot;fadeInDown&quot;,&quot;post_body&quot;:&quot;fadeInDown&quot;,&quot;coll_header&quot;:&quot;fadeInLeft&quot;,&quot;sidebar&quot;:&quot;fadeInUp&quot;}},&quot;prism&quot;:false,&quot;i18n&quot;:{&quot;placeholder&quot;:&quot;搜索...&quot;,&quot;empty&quot;:&quot;没有找到任何搜索结果：${query}&quot;,&quot;hits_time&quot;:&quot;找到 ${hits} 个搜索结果（用时 ${time} 毫秒）&quot;,&quot;hits&quot;:&quot;找到 ${hits} 个搜索结果&quot;}}</script><script src="/js/config.js"></script>
-<meta name="description" content="记录个人技术成长和生活体会的小站">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Jaly&#39;s Blog">
-<meta property="og:url" content="http://www.jaly.xyz/index.html">
+<meta name="description" content="ORM 框架介绍 ORM：Object  Relational   Mapping  —— 对象关系映射。    作用：  通过操作结构体对象，来达到操作数据库表的目的。 通过结构体对象，来生成数据库表。   优点：  SQL有可能 比较复杂。（Oracle — 子查询 – 嵌套）ORM 操作数据库，不需要使用 SQL 不同开发者，书写的 SQL 语句执行效率不同。   go语言支持的 ORM：">
+<meta property="og:type" content="article">
+<meta property="og:title" content="gorm使用">
+<meta property="og:url" content="http://www.jaly.xyz/2021/B63TYY/index.html">
 <meta property="og:site_name" content="Jaly&#39;s Blog">
-<meta property="og:description" content="记录个人技术成长和生活体会的小站">
+<meta property="og:description" content="ORM 框架介绍 ORM：Object  Relational   Mapping  —— 对象关系映射。    作用：  通过操作结构体对象，来达到操作数据库表的目的。 通过结构体对象，来生成数据库表。   优点：  SQL有可能 比较复杂。（Oracle — 子查询 – 嵌套）ORM 操作数据库，不需要使用 SQL 不同开发者，书写的 SQL 语句执行效率不同。   go语言支持的 ORM：">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="d:/秋招准备/golang/项目/第10阶段-GO语言微服务项目/第06天（gorm操作mysql-创建项目用表）/1-教学资料/课本笔记-06.assets/1582249051388.png">
+<meta property="og:image" content="d:/秋招准备/golang/项目/第10阶段-GO语言微服务项目/第06天（gorm操作mysql-创建项目用表）/1-教学资料/课本笔记-06.assets/1582255572530.png">
+<meta property="article:published_time" content="2021-06-18T02:19:24.000Z">
+<meta property="article:modified_time" content="2021-08-16T02:25:59.881Z">
 <meta property="article:author" content="Jaly">
+<meta property="article:tag" content="gorm">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="d:/秋招准备/golang/项目/第10阶段-GO语言微服务项目/第06天（gorm操作mysql-创建项目用表）/1-教学资料/课本笔记-06.assets/1582249051388.png">
 
 
-<link rel="canonical" href="http://www.jaly.xyz/">
+<link rel="canonical" href="http://www.jaly.xyz/2021/B63TYY/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{&quot;sidebar&quot;:&quot;&quot;,&quot;isHome&quot;:true,&quot;isPost&quot;:false,&quot;lang&quot;:&quot;zh-CN&quot;,&quot;comments&quot;:&quot;&quot;,&quot;permalink&quot;:&quot;&quot;,&quot;path&quot;:&quot;index.html&quot;,&quot;title&quot;:&quot;&quot;}</script>
+<script class="next-config" data-name="page" type="application/json">{&quot;sidebar&quot;:&quot;&quot;,&quot;isHome&quot;:false,&quot;isPost&quot;:true,&quot;lang&quot;:&quot;zh-CN&quot;,&quot;comments&quot;:true,&quot;permalink&quot;:&quot;http:&#x2F;&#x2F;www.jaly.xyz&#x2F;2021&#x2F;B63TYY&#x2F;&quot;,&quot;path&quot;:&quot;2021&#x2F;B63TYY&#x2F;&quot;,&quot;title&quot;:&quot;gorm使用&quot;}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">&quot;&quot;</script>
-<title>Jaly's Blog</title>
+<title>gorm使用 | Jaly's Blog</title>
   
 
 
@@ -104,7 +110,7 @@
 
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           文章目录
@@ -117,6 +123,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#ORM-%E6%A1%86%E6%9E%B6%E4%BB%8B%E7%BB%8D"><span class="nav-number">1.</span> <span class="nav-text">ORM 框架介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#gorm-%E8%BF%9E%E6%8E%A5%E6%95%B0%E6%8D%AE%E5%BA%93%E3%80%81%E5%BB%BA%E8%A1%A8"><span class="nav-number">2.</span> <span class="nav-text">gorm 连接数据库、建表</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#gORM-%E6%93%8D%E4%BD%9C-MySQL-%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-number">2.1.</span> <span class="nav-text">gORM 操作 MySQL 数据库</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E8%A1%A8"><span class="nav-number">2.1.1.</span> <span class="nav-text">创建表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MySQL-%E5%8C%85%E7%9A%84-init-%E6%96%B9%E6%B3%95"><span class="nav-number">2.1.2.</span> <span class="nav-text">MySQL 包的 init 方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#gorm%E7%9A%84%E8%BF%9E%E6%8E%A5%E6%B1%A0"><span class="nav-number">2.1.3.</span> <span class="nav-text">gorm的连接池</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#gorm-%E6%93%8D%E4%BD%9C%E6%95%B0%E6%8D%AE%E5%BA%93%E6%95%B0%E6%8D%AE"><span class="nav-number">3.</span> <span class="nav-text">gorm 操作数据库数据</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#gorm-%E6%8F%92%E5%85%A5%E6%95%B0%E6%8D%AE"><span class="nav-number">3.1.</span> <span class="nav-text">gorm 插入数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#gorm-%E6%9F%A5%E8%AF%A2%E6%95%B0%E6%8D%AE"><span class="nav-number">3.2.</span> <span class="nav-text">gorm 查询数据</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%80%E5%8D%95%E6%9F%A5%E8%AF%A2%E6%96%B9%E6%B3%95%EF%BC%9A"><span class="nav-number">3.2.1.</span> <span class="nav-text">简单查询方法：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#where-%E5%AD%90%E5%8F%A5%E4%BD%BF%E7%94%A8"><span class="nav-number">3.2.2.</span> <span class="nav-text">where 子句使用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#gorm-%E6%9B%B4%E6%96%B0%E6%95%B0%E6%8D%AE"><span class="nav-number">3.3.</span> <span class="nav-text">gorm 更新数据</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#save"><span class="nav-number">3.3.1.</span> <span class="nav-text">save</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#update"><span class="nav-number">3.3.2.</span> <span class="nav-text">update</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#updates"><span class="nav-number">3.3.3.</span> <span class="nav-text">updates</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#grom-%E5%88%A0%E9%99%A4%E6%95%B0%E6%8D%AE"><span class="nav-number">3.4.</span> <span class="nav-text">grom 删除数据</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A0%E9%99%A4"><span class="nav-number">3.4.1.</span> <span class="nav-text">删除</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BD%AF%E5%88%A0%E9%99%A4"><span class="nav-number">3.4.2.</span> <span class="nav-text">软删除</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MySQL-8%E5%B0%8F%E6%97%B6-%E6%97%B6%E5%8C%BA%E9%97%AE%E9%A2%98"><span class="nav-number">3.4.3.</span> <span class="nav-text">MySQL 8小时 时区问题</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#gorm-%E8%AE%BE%E7%BD%AE%E8%A1%A8%E5%B1%9E%E6%80%A7"><span class="nav-number">4.</span> <span class="nav-text">gorm 设置表属性</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E8%A1%A8%E5%AD%97%E6%AE%B5%E5%A4%A7%E5%B0%8F"><span class="nav-number">4.1.</span> <span class="nav-text">修改表字段大小</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E6%97%B6%E9%97%B4"><span class="nav-number">4.2.</span> <span class="nav-text">设置时间</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -182,16 +189,17 @@
 </noscript>
 
 
-    <div class="main-inner index posts-expand">
+    <div class="main-inner post posts-expand">
 
-    
+
+  
 
 
 <div class="post-block">
   
   
 
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://www.jaly.xyz/2021/B63TYY/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -204,9 +212,9 @@
       <meta itemprop="name" content="Jaly's Blog">
     </span>
       <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/B63TYY/" class="post-title-link" itemprop="url">gorm使用</a>
-        </h2>
+        <h1 class="post-title" itemprop="name headline">
+          gorm使用
+        </h1>
 
         <div class="post-meta-container">
           <div class="post-meta">
@@ -259,7 +267,7 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h1 id="ORM-框架介绍"><a href="#ORM-框架介绍" class="headerlink" title="ORM 框架介绍"></a>ORM 框架介绍</h1><ul>
+        <h1 id="ORM-框架介绍"><a href="#ORM-框架介绍" class="headerlink" title="ORM 框架介绍"></a>ORM 框架介绍</h1><ul>
 <li>ORM：Object  Relational   Mapping  —— 对象关系映射。</li>
 </ul>
 <p><img src="D:/秋招准备/golang/项目/第10阶段-GO语言微服务项目/第06天（gorm操作mysql-创建项目用表）/1-教学资料/课本笔记-06.assets/1582249051388.png" alt="1582249051388"></p>
@@ -467,7 +475,6 @@ fmt.Println(GlobalConn.Save(&amp;stu).Error)
 </ul>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建全局结构体</span></span><br><span class="line"><span class="keyword">type</span> Student <span class="keyword">struct</span> &#123;</span><br><span class="line">	Id    <span class="keyword">int</span></span><br><span class="line">	Name  <span class="keyword">string</span>    <span class="string">`gorm:&quot;size:100;default:&#x27;xiaoming&#x27;&quot;`</span></span><br><span class="line">	Age   <span class="keyword">int</span></span><br><span class="line">	Class <span class="keyword">int</span>       <span class="string">`gorm:&quot;not null&quot;`</span></span><br><span class="line">	Join  time.Time <span class="string">`gorm:&quot;type:timestamp&quot;`</span><span class="comment">// 创建 Student 表指定 timestamp类型。</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-      
     </div>
 
     
@@ -475,106 +482,25 @@ fmt.Println(GlobalConn.Save(&amp;stu).Error)
     
 
     <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
+          <div class="post-tags">
+              <a href="/tags/gorm/" rel="tag"># gorm</a>
+          </div>
 
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://www.jaly.xyz/2021/1HQZ21Y/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/uploads/avatar.jpg">
-      <meta itemprop="name" content="Jaly">
-      <meta itemprop="description" content="记录个人技术成长和生活体会的小站">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jaly's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/1HQZ21Y/" class="post-title-link" itemprop="url">研二结束了</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2021-06-17 10:43:13 / 修改时间：22:38:31" itemprop="dateCreated datePublished" datetime="2021-06-17T10:43:13+08:00">2021-06-17</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E7%94%9F%E6%B4%BB/" itemprop="url" rel="index"><span itemprop="name">生活</span></a>
-        </span>
-    </span>
-
-  
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>348</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>第一次写博客，随便写写啦。。。。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/1HQZ21Y/">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
         
-      
-    </div>
 
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/1HQZ21Y/" rel="prev" title="研二结束了">
+                  <i class="fa fa-chevron-left"></i> 研二结束了
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
     </footer>
   </article>
 </div>
+
 
 
 
