@@ -20,28 +20,29 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
 <script class="next-config" data-name="main" type="application/json">{&quot;hostname&quot;:&quot;www.jaly.xyz&quot;,&quot;root&quot;:&quot;&#x2F;&quot;,&quot;images&quot;:&quot;&#x2F;images&quot;,&quot;scheme&quot;:&quot;Gemini&quot;,&quot;version&quot;:&quot;8.5.0&quot;,&quot;exturl&quot;:false,&quot;sidebar&quot;:{&quot;position&quot;:&quot;left&quot;,&quot;display&quot;:&quot;always&quot;,&quot;padding&quot;:18,&quot;offset&quot;:20},&quot;copycode&quot;:false,&quot;bookmark&quot;:{&quot;enable&quot;:false,&quot;color&quot;:&quot;#222&quot;,&quot;save&quot;:&quot;auto&quot;},&quot;fancybox&quot;:false,&quot;mediumzoom&quot;:false,&quot;lazyload&quot;:false,&quot;pangu&quot;:false,&quot;comments&quot;:{&quot;style&quot;:&quot;tabs&quot;,&quot;active&quot;:null,&quot;storage&quot;:true,&quot;lazyload&quot;:false,&quot;nav&quot;:null},&quot;motion&quot;:{&quot;enable&quot;:true,&quot;async&quot;:false,&quot;transition&quot;:{&quot;post_block&quot;:&quot;fadeIn&quot;,&quot;post_header&quot;:&quot;fadeInDown&quot;,&quot;post_body&quot;:&quot;fadeInDown&quot;,&quot;coll_header&quot;:&quot;fadeInLeft&quot;,&quot;sidebar&quot;:&quot;fadeInUp&quot;}},&quot;prism&quot;:false,&quot;i18n&quot;:{&quot;placeholder&quot;:&quot;搜索...&quot;,&quot;empty&quot;:&quot;没有找到任何搜索结果：${query}&quot;,&quot;hits_time&quot;:&quot;找到 ${hits} 个搜索结果（用时 ${time} 毫秒）&quot;,&quot;hits&quot;:&quot;找到 ${hits} 个搜索结果&quot;}}</script><script src="/js/config.js"></script>
-<meta name="description" content="第一次写博客，随便写写啦。。。。">
+<meta name="description" content="Redis 基本使用 修改 配置文件。 &#x2F;etc&#x2F;redis&#x2F;redis.conf .  bind 地址。修改成当前主机地址。 —— 192.168.6.108    port： 6379   开启 redis： sudo  redis-server  &#x2F;etc&#x2F;redis&#x2F;redis.conf 验证 ： ps xua | grep redis  —— iP 和 port   连接 redis ：">
 <meta property="og:type" content="article">
-<meta property="og:title" content="研二结束了">
-<meta property="og:url" content="http://www.jaly.xyz/2021/1HQZ21Y/index.html">
+<meta property="og:title" content="redis基本操作">
+<meta property="og:url" content="http://www.jaly.xyz/2021/N3S29V/index.html">
 <meta property="og:site_name" content="Jaly&#39;s Blog">
-<meta property="og:description" content="第一次写博客，随便写写啦。。。。">
+<meta property="og:description" content="Redis 基本使用 修改 配置文件。 &#x2F;etc&#x2F;redis&#x2F;redis.conf .  bind 地址。修改成当前主机地址。 —— 192.168.6.108    port： 6379   开启 redis： sudo  redis-server  &#x2F;etc&#x2F;redis&#x2F;redis.conf 验证 ： ps xua | grep redis  —— iP 和 port   连接 redis ：">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-06-17T02:43:13.000Z">
-<meta property="article:modified_time" content="2021-08-16T03:36:22.800Z">
+<meta property="article:published_time" content="2021-06-20T06:51:43.000Z">
+<meta property="article:modified_time" content="2021-08-16T06:52:58.888Z">
 <meta property="article:author" content="Jaly">
-<meta property="article:tag" content="随笔">
+<meta property="article:tag" content="redis">
+<meta property="article:tag" content="Redis">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="http://www.jaly.xyz/2021/1HQZ21Y/">
+<link rel="canonical" href="http://www.jaly.xyz/2021/N3S29V/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{&quot;sidebar&quot;:&quot;&quot;,&quot;isHome&quot;:false,&quot;isPost&quot;:true,&quot;lang&quot;:&quot;zh-CN&quot;,&quot;comments&quot;:true,&quot;permalink&quot;:&quot;http:&#x2F;&#x2F;www.jaly.xyz&#x2F;2021&#x2F;1HQZ21Y&#x2F;&quot;,&quot;path&quot;:&quot;2021&#x2F;1HQZ21Y&#x2F;&quot;,&quot;title&quot;:&quot;研二结束了&quot;}</script>
+<script class="next-config" data-name="page" type="application/json">{&quot;sidebar&quot;:&quot;&quot;,&quot;isHome&quot;:false,&quot;isPost&quot;:true,&quot;lang&quot;:&quot;zh-CN&quot;,&quot;comments&quot;:true,&quot;permalink&quot;:&quot;http:&#x2F;&#x2F;www.jaly.xyz&#x2F;2021&#x2F;N3S29V&#x2F;&quot;,&quot;path&quot;:&quot;2021&#x2F;N3S29V&#x2F;&quot;,&quot;title&quot;:&quot;redis基本操作&quot;}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">&quot;&quot;</script>
-<title>研二结束了 | Jaly's Blog</title>
+<title>redis基本操作 | Jaly's Blog</title>
   
 
 
@@ -107,7 +108,7 @@
 
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           文章目录
@@ -120,6 +121,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Redis-%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8"><span class="nav-number">1.</span> <span class="nav-text">Redis 基本使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#go%E8%AF%AD%E8%A8%80%E6%93%8D%E4%BD%9C-Redis"><span class="nav-number">2.</span> <span class="nav-text">go语言操作 Redis</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -196,7 +198,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.jaly.xyz/2021/1HQZ21Y/">
+    <link itemprop="mainEntityOfPage" href="http://www.jaly.xyz/2021/N3S29V/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/uploads/avatar.jpg">
@@ -209,7 +211,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          研二结束了
+          redis基本操作
         </h1>
 
         <div class="post-meta-container">
@@ -220,14 +222,14 @@
       </span>
       <span class="post-meta-item-text">发表于</span>
 
-      <time title="创建时间：2021-06-17 10:43:13" itemprop="dateCreated datePublished" datetime="2021-06-17T10:43:13+08:00">2021-06-17</time>
+      <time title="创建时间：2021-06-20 14:51:43" itemprop="dateCreated datePublished" datetime="2021-06-20T14:51:43+08:00">2021-06-20</time>
     </span>
       <span class="post-meta-item">
         <span class="post-meta-item-icon">
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2021-08-16 11:36:22" itemprop="dateModified" datetime="2021-08-16T11:36:22+08:00">2021-08-16</time>
+        <time title="修改时间：2021-08-16 14:52:58" itemprop="dateModified" datetime="2021-08-16T14:52:58+08:00">2021-08-16</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -235,7 +237,7 @@
       </span>
       <span class="post-meta-item-text">分类于</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E7%94%9F%E6%B4%BB/" itemprop="url" rel="index"><span itemprop="name">生活</span></a>
+          <a href="/categories/golang/" itemprop="url" rel="index"><span itemprop="name">golang</span></a>
         </span>
     </span>
 
@@ -245,7 +247,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>348</span>
+      <span>948</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -256,7 +258,6 @@
     </span>
 </div>
 
-            <div class="post-description">第一次写博客，随便写写啦。。。。</div>
         </div>
       </header>
 
@@ -264,9 +265,63 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <p>六月初以来自己一直都有点焦虑，自己回忆了下读研以来的自己做的事情，没有太多有成就感的东西，技术层面也没有很多积累。感觉读研以来，我变了很多，没有本科时候那么努力了，或者说是没有具体的努力的方向。研究生入学后，本来想专心研究算法，毕业也做算法岗的方向，不过实验室各种任务都很多，并不能够专心于一个方向，最后哪个方面都没搞好。究其根本原因，是我19年入学后开始有些放纵了。。。</p>
-<p>最近非矿内部也出现疫情了，心理还是有些害怕，担心下个月没法回国，有些后悔来这出差了。这几天也自己隔离起来了，仔细一想，这回国后还要继续隔离到八月底，整天一个人呆在房间没人说话，这到八月底我怕是连话都不会说了。</p>
-<p>今天搭了个博客站点，之后也会定期更新博客，总结一下自己技术成长和一些生活上的事情，通过博客来提醒自己时刻保持着学习。</p>
+        <h2 id="Redis-基本使用"><a href="#Redis-基本使用" class="headerlink" title="Redis 基本使用"></a>Redis 基本使用</h2><ol>
+<li>修改 配置文件。 /etc/redis/redis.conf . <ul>
+<li>bind 地址。修改成当前主机地址。 —— 192.168.6.108 </li>
+</ul>
+</li>
+<li>port：<ul>
+<li>6379</li>
+</ul>
+</li>
+<li>开启 redis：<ul>
+<li>sudo  redis-server  /etc/redis/redis.conf</li>
+<li>验证 ： ps xua | grep redis  —— iP 和 port</li>
+</ul>
+</li>
+<li>连接 redis ：<ul>
+<li>redis-cli -h 192.168.6.108 -p 6379</li>
+</ul>
+</li>
+<li>查看所有：<ul>
+<li>keys *</li>
+</ul>
+</li>
+<li>删除所有：<ul>
+<li>flushall</li>
+</ul>
+</li>
+<li>添加一条：<ul>
+<li>set key  value  ——   set  hello  world</li>
+</ul>
+</li>
+<li>获取一条：<ul>
+<li>get key </li>
+</ul>
+</li>
+</ol>
+<h2 id="go语言操作-Redis"><a href="#go语言操作-Redis" class="headerlink" title="go语言操作 Redis"></a>go语言操作 Redis</h2><ul>
+<li><p>从 redis.cn —— 客户端 —— go语言 —— 选择 redigo —— <a target="_blank" rel="noopener" href="https://godoc.org/github.com/gomodule/redigo/redis#pkg-examples">https://godoc.org/github.com/gomodule/redigo/redis#pkg-examples</a>  查看 API</p>
+</li>
+<li><p>主要分为 3 类：</p>
+<ol>
+<li>连接数据库。   <ul>
+<li>API文档中，所有以 Dial 开头。</li>
+</ul>
+</li>
+<li>操作数据库。   <ul>
+<li>Do() 函数【推荐】;  Send()函数, 需要配合Flush()、Receive() 3 个函数使用。</li>
+</ul>
+</li>
+<li>返回helper。   <ul>
+<li>相当于 “类型断言”。根据使用的具体数据类型，选择调用。</li>
+</ul>
+</li>
+</ol>
+</li>
+<li><p>添加测试案例：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">&quot;github.com/gomodule/redigo/redis&quot;</span></span><br><span class="line">	<span class="string">&quot;fmt&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span>  &#123;</span><br><span class="line">	<span class="comment">// 1. 链接数据库</span></span><br><span class="line">	conn, err := redis.Dial(<span class="string">&quot;tcp&quot;</span>, <span class="string">&quot;192.168.6.108:6379&quot;</span>)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		fmt.Println(<span class="string">&quot;redis Dial err:&quot;</span>, err)</span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">defer</span> conn.Close()</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 2. 操作数据库</span></span><br><span class="line">	reply, err := conn.Do(<span class="string">&quot;set&quot;</span>, <span class="string">&quot;itcast&quot;</span>, <span class="string">&quot;itheima&quot;</span>)</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 3. 类型断言类函数. ---- 确定成具体的数据类型</span></span><br><span class="line">	r, e := redis.String(reply, err)</span><br><span class="line"></span><br><span class="line">	fmt.Println(r, e)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
 
     </div>
 
@@ -276,17 +331,21 @@
 
     <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/%E9%9A%8F%E7%AC%94/" rel="tag"># 随笔</a>
+              <a href="/tags/redis/" rel="tag"># redis</a>
+              <a href="/tags/Redis/" rel="tag"># Redis</a>
           </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-item">
+                <a href="/2021/B63TYY/" rel="prev" title="gorm使用">
+                  <i class="fa fa-chevron-left"></i> gorm使用
+                </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2021/B63TYY/" rel="next" title="gorm使用">
-                  gorm使用 <i class="fa fa-chevron-right"></i>
+                <a href="/2021/1Z1W9S9/" rel="next" title="gin-中间件">
+                  gin-中间件 <i class="fa fa-chevron-right"></i>
                 </a>
             </div>
           </div>

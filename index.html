@@ -133,7 +133,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">2</span>
+          <span class="site-state-item-count">4</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -146,7 +146,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-count">6</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -192,6 +192,336 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://www.jaly.xyz/2021/1Z1W9S9/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+      <meta itemprop="name" content="Jaly">
+      <meta itemprop="description" content="记录个人技术成长和生活体会的小站">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jaly's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/1Z1W9S9/" class="post-title-link" itemprop="url">gin-中间件</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-06-23 15:03:27" itemprop="dateCreated datePublished" datetime="2021-06-23T15:03:27+08:00">2021-06-23</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2021-08-16 15:09:30" itemprop="dateModified" datetime="2021-08-16T15:09:30+08:00">2021-08-16</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/golang/" itemprop="url" rel="index"><span itemprop="name">golang</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>4k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>4 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="中间件-middleWare"><a href="#中间件-middleWare" class="headerlink" title="中间件 (middleWare)"></a>中间件 (middleWare)</h1><ul>
+<li>中间件，对以后的路由全部生效。<ul>
+<li>设置好中间件以后，所有的路由都会使用这个中间件。</li>
+<li>设置以前的路由，不生效。</li>
+</ul>
+</li>
+</ul>
+<h2 id="什么是-“中间件”："><a href="#什么是-“中间件”：" class="headerlink" title="什么是 “中间件”："></a>什么是 “中间件”：</h2><ul>
+<li><p>早期：</p>
+<ul>
+<li>用于 系统 和 应用之间。</li>
+<li>中间件： 内核 —— 中间件 ——  用户应用</li>
+</ul>
+</li>
+<li><p>现在：</p>
+<ul>
+<li>用于 两个模块之间的 功能 软件(模块)</li>
+<li>中间件：—— 承上启下。  前后台开发： 路由 ——&gt; 中间件 (起过滤作用) ——&gt; 控制器</li>
+<li>特性：对 “中间件”指定位置 ， 以下的路由起作用！以上的，作用不到。</li>
+</ul>
+</li>
+</ul>
+<h3 id="中间件类型"><a href="#中间件类型" class="headerlink" title="中间件类型"></a>中间件类型</h3><ul>
+<li><p>gin 框架规定：中间件类型为：gin.HandlerFunc 类型。</p>
+</li>
+<li><p>gin.HandlerFunc 类型。就是 ：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *gin.Context)</span></span> &#123; </span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 示例：</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">Logger</span><span class="params">()</span> <span class="title">gin</span>.<span class="title">HandlerFunc</span></span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">func</span> <span class="params">(c *gin.Context)</span></span> &#123;   </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">r.Use(Logger())		<span class="comment">// 传 “中间件” 做参数。</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="中间件测试"><a href="#中间件测试" class="headerlink" title="中间件测试"></a>中间件测试</h3><ul>
+<li>中间件使用的 3 个知识：</li>
+</ul>
+<h4 id="Next"><a href="#Next" class="headerlink" title="Next()"></a>Next()</h4><ul>
+<li><p>表示，跳过当前中间件剩余内容， 去执行下一个中间件。 当所有操作执行完之后，以出栈的执行顺序返回，执行剩余代码。</p>
+</li>
+<li><p>```go</p>
+<p>// 创建中间件<br>func Test1(ctx *gin.Context)  {</p>
+<pre><code>fmt.Println(&quot;1111&quot;)
+ctx.Next()
+fmt.Println(&quot;4444&quot;)
+</code></pre>
+<p>}<br>// 创建 另外一种格式的中间件.<br>func Test2() gin.HandlerFunc {</p>
+<pre><code>return func(context *gin.Context) &#123;
+    fmt.Println(&quot;3333&quot;)
+    context.Next()
+    fmt.Println(&quot;5555&quot;)
+&#125;
+</code></pre>
+<p>}<br>func main()  {</p>
+<pre><code>router := gin.Default()
+
+// 使用中间件
+router.Use(Test1)
+router.Use(Test2())
+
+router.GET(&quot;/test&quot;, func(context *gin.Context) &#123;
+    fmt.Println(&quot;2222&quot;)
+    context.Writer.WriteString(&quot;hello world!&quot;)
+&#125;)
+
+router.Run(&quot;:9999&quot;)
+</code></pre>
+<p>}</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">#### return </span><br><span class="line"></span><br><span class="line">- 终止执行当前中间件剩余内容，执行下一个中间件。 当所有的函数执行结束后，以出栈的顺序执行返回，但，不执行return后的代码！</span><br><span class="line"></span><br><span class="line">  ```go</span><br><span class="line">  // 创建中间件</span><br><span class="line">  func Test1(ctx *gin.Context)  &#123;</span><br><span class="line">  	fmt.Println(&quot;1111&quot;)</span><br><span class="line">  	</span><br><span class="line">  	ctx.Next()</span><br><span class="line">  </span><br><span class="line">  	fmt.Println(&quot;4444&quot;)</span><br><span class="line">  &#125;</span><br><span class="line">  // 创建 另外一种格式的中间件.</span><br><span class="line">  func Test2() gin.HandlerFunc &#123;</span><br><span class="line">  	return func(context *gin.Context) &#123;</span><br><span class="line">  		fmt.Println(&quot;3333&quot;)</span><br><span class="line">  </span><br><span class="line">  		return</span><br><span class="line">  		context.Next()</span><br><span class="line">  </span><br><span class="line">  		fmt.Println(&quot;5555&quot;)</span><br><span class="line">  	&#125;</span><br><span class="line">  &#125;</span><br><span class="line">  func main()  &#123;</span><br><span class="line">  	router := gin.Default()</span><br><span class="line">  </span><br><span class="line">  	// 使用中间件</span><br><span class="line">  	router.Use(Test1)</span><br><span class="line">  	router.Use(Test2())</span><br><span class="line">  </span><br><span class="line">  	router.GET(&quot;/test&quot;, func(context *gin.Context) &#123;</span><br><span class="line">  		fmt.Println(&quot;2222&quot;)</span><br><span class="line">  		context.Writer.WriteString(&quot;hello world!&quot;)</span><br><span class="line">  	&#125;)</span><br><span class="line">  </span><br><span class="line">  	router.Run(&quot;:9999&quot;)</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="Abort"><a href="#Abort" class="headerlink" title="Abort()"></a>Abort()</h4><ul>
+<li><p>只执行当前中间件， 操作完成后，以出栈的顺序，依次返回上一级中间件。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建中间件</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">Test1</span><span class="params">(ctx *gin.Context)</span></span>  &#123;</span><br><span class="line">	fmt.Println(<span class="string">&quot;1111&quot;</span>)</span><br><span class="line"></span><br><span class="line">	ctx.Next()</span><br><span class="line"></span><br><span class="line">	fmt.Println(<span class="string">&quot;4444&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 创建 另外一种格式的中间件.</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">Test2</span><span class="params">()</span> <span class="title">gin</span>.<span class="title">HandlerFunc</span></span> &#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="function"><span class="keyword">func</span><span class="params">(context *gin.Context)</span></span> &#123;</span><br><span class="line">		fmt.Println(<span class="string">&quot;3333&quot;</span>)</span><br><span class="line"></span><br><span class="line">		context.Abort()</span><br><span class="line"></span><br><span class="line">		fmt.Println(<span class="string">&quot;5555&quot;</span>)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span>  &#123;</span><br><span class="line">	router := gin.Default()</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 使用中间件</span></span><br><span class="line">	router.Use(Test1)</span><br><span class="line">	router.Use(Test2())</span><br><span class="line"></span><br><span class="line">	router.GET(<span class="string">&quot;/test&quot;</span>, <span class="function"><span class="keyword">func</span><span class="params">(context *gin.Context)</span></span> &#123;</span><br><span class="line">		fmt.Println(<span class="string">&quot;2222&quot;</span>)</span><br><span class="line">		context.Writer.WriteString(<span class="string">&quot;hello world!&quot;</span>)</span><br><span class="line">	&#125;)</span><br><span class="line"></span><br><span class="line">	router.Run(<span class="string">&quot;:9999&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+</ul>
+<p><img src="D:\Erxiong222.github.io\source_posts\img\1582529575294.png"></p>
+<p><img src="D:\Erxiong222.github.io\source_posts\img\1582529769290.png"></p>
+<h3 id="中间件测试业务时间："><a href="#中间件测试业务时间：" class="headerlink" title="中间件测试业务时间："></a>中间件测试业务时间：</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建中间件</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">Test1</span><span class="params">(ctx *gin.Context)</span></span>  &#123;</span><br><span class="line">	fmt.Println(<span class="string">&quot;1111&quot;</span>)</span><br><span class="line"></span><br><span class="line">	t := time.Now()</span><br><span class="line"></span><br><span class="line">	ctx.Next()</span><br><span class="line"></span><br><span class="line">	fmt.Println(time.Now().Sub(t))</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 创建 另外一种格式的中间件.</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">Test2</span><span class="params">()</span> <span class="title">gin</span>.<span class="title">HandlerFunc</span></span> &#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="function"><span class="keyword">func</span><span class="params">(context *gin.Context)</span></span> &#123;</span><br><span class="line">		fmt.Println(<span class="string">&quot;3333&quot;</span>)</span><br><span class="line">        context.Abort()		<span class="comment">// 将 Abort() 替换成 Next()， 反复测试，获取时间差！</span></span><br><span class="line">		fmt.Println(<span class="string">&quot;5555&quot;</span>)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span>  &#123;</span><br><span class="line">	router := gin.Default()</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 使用中间件</span></span><br><span class="line">	router.Use(Test1)</span><br><span class="line">	router.Use(Test2())</span><br><span class="line"></span><br><span class="line">	router.GET(<span class="string">&quot;/test&quot;</span>, <span class="function"><span class="keyword">func</span><span class="params">(context *gin.Context)</span></span> &#123;</span><br><span class="line">		fmt.Println(<span class="string">&quot;2222&quot;</span>)</span><br><span class="line">		context.Writer.WriteString(<span class="string">&quot;hello world!&quot;</span>)</span><br><span class="line">	&#125;)</span><br><span class="line"></span><br><span class="line">	router.Run(<span class="string">&quot;:9999&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><ul>
+<li>2种 书写格式：（见 前面笔记）</li>
+<li>3个 操作函数/关键字： Next()、return、Abort()</li>
+<li>作用域：作用域 以下 的路由。（ 对以上的 路由 无效！）</li>
+</ul>
+<h1 id="中间件实战使用"><a href="#中间件实战使用" class="headerlink" title="中间件实战使用"></a>中间件实战使用</h1><ol>
+<li><p>在 web/main.go 中 创建 中间件。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">LoginFilter</span><span class="params">()</span> <span class="title">gin</span>.<span class="title">HandlerFunc</span></span> &#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="function"><span class="keyword">func</span><span class="params">(ctx *gin.Context)</span></span> &#123;</span><br><span class="line">		<span class="comment">// 初始化 Session 对象</span></span><br><span class="line">		s := sessions.Default(ctx)</span><br><span class="line">		userName := s.Get(<span class="string">&quot;userName&quot;</span>)</span><br><span class="line"></span><br><span class="line">		<span class="keyword">if</span> userName == <span class="literal">nil</span> &#123;</span><br><span class="line">			ctx.Abort()			<span class="comment">// 从这里返回, 不必继续执行了</span></span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			ctx.Next()			<span class="comment">// 继续向下</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>在 所有需要进行 Session 校验操作之前， 添加、使用这个中间件。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 添加路由分组</span></span><br><span class="line">r1 := router.Group(<span class="string">&quot;/api/v1.0&quot;</span>)</span><br><span class="line">&#123;</span><br><span class="line">    r1.GET(<span class="string">&quot;/session&quot;</span>, controller.GetSession)</span><br><span class="line">    r1.GET(<span class="string">&quot;/imagecode/:uuid&quot;</span>, controller.GetImageCd)</span><br><span class="line">    r1.GET(<span class="string">&quot;/smscode/:phone&quot;</span>, controller.GetSmscd)</span><br><span class="line">    r1.POST(<span class="string">&quot;/users&quot;</span>, controller.PostRet)</span><br><span class="line">    r1.GET(<span class="string">&quot;/areas&quot;</span>, controller.GetArea)</span><br><span class="line">    r1.POST(<span class="string">&quot;/sessions&quot;</span>, controller.PostLogin)</span><br><span class="line"></span><br><span class="line">r1.Use(LoginFilter())  <span class="comment">//以后的路由,都不需要再校验 Session 了. 直接获取数据即可!</span></span><br><span class="line"></span><br><span class="line">    r1.DELETE(<span class="string">&quot;/session&quot;</span>, controller.DeleteSession)</span><br><span class="line">    r1.GET(<span class="string">&quot;/user&quot;</span>, controller.GetUserInfo)</span><br><span class="line">    r1.PUT(<span class="string">&quot;/user/name&quot;</span>, controller.PutUserInfo)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://www.jaly.xyz/2021/N3S29V/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+      <meta itemprop="name" content="Jaly">
+      <meta itemprop="description" content="记录个人技术成长和生活体会的小站">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jaly's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/N3S29V/" class="post-title-link" itemprop="url">redis基本操作</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-06-20 14:51:43" itemprop="dateCreated datePublished" datetime="2021-06-20T14:51:43+08:00">2021-06-20</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2021-08-16 14:52:58" itemprop="dateModified" datetime="2021-08-16T14:52:58+08:00">2021-08-16</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/golang/" itemprop="url" rel="index"><span itemprop="name">golang</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>948</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>1 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="Redis-基本使用"><a href="#Redis-基本使用" class="headerlink" title="Redis 基本使用"></a>Redis 基本使用</h2><ol>
+<li>修改 配置文件。 /etc/redis/redis.conf . <ul>
+<li>bind 地址。修改成当前主机地址。 —— 192.168.6.108 </li>
+</ul>
+</li>
+<li>port：<ul>
+<li>6379</li>
+</ul>
+</li>
+<li>开启 redis：<ul>
+<li>sudo  redis-server  /etc/redis/redis.conf</li>
+<li>验证 ： ps xua | grep redis  —— iP 和 port</li>
+</ul>
+</li>
+<li>连接 redis ：<ul>
+<li>redis-cli -h 192.168.6.108 -p 6379</li>
+</ul>
+</li>
+<li>查看所有：<ul>
+<li>keys *</li>
+</ul>
+</li>
+<li>删除所有：<ul>
+<li>flushall</li>
+</ul>
+</li>
+<li>添加一条：<ul>
+<li>set key  value  ——   set  hello  world</li>
+</ul>
+</li>
+<li>获取一条：<ul>
+<li>get key </li>
+</ul>
+</li>
+</ol>
+<h2 id="go语言操作-Redis"><a href="#go语言操作-Redis" class="headerlink" title="go语言操作 Redis"></a>go语言操作 Redis</h2><ul>
+<li><p>从 redis.cn —— 客户端 —— go语言 —— 选择 redigo —— <a target="_blank" rel="noopener" href="https://godoc.org/github.com/gomodule/redigo/redis#pkg-examples">https://godoc.org/github.com/gomodule/redigo/redis#pkg-examples</a>  查看 API</p>
+</li>
+<li><p>主要分为 3 类：</p>
+<ol>
+<li>连接数据库。   <ul>
+<li>API文档中，所有以 Dial 开头。</li>
+</ul>
+</li>
+<li>操作数据库。   <ul>
+<li>Do() 函数【推荐】;  Send()函数, 需要配合Flush()、Receive() 3 个函数使用。</li>
+</ul>
+</li>
+<li>返回helper。   <ul>
+<li>相当于 “类型断言”。根据使用的具体数据类型，选择调用。</li>
+</ul>
+</li>
+</ol>
+</li>
+<li><p>添加测试案例：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">&quot;github.com/gomodule/redigo/redis&quot;</span></span><br><span class="line">	<span class="string">&quot;fmt&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span>  &#123;</span><br><span class="line">	<span class="comment">// 1. 链接数据库</span></span><br><span class="line">	conn, err := redis.Dial(<span class="string">&quot;tcp&quot;</span>, <span class="string">&quot;192.168.6.108:6379&quot;</span>)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		fmt.Println(<span class="string">&quot;redis Dial err:&quot;</span>, err)</span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">defer</span> conn.Close()</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 2. 操作数据库</span></span><br><span class="line">	reply, err := conn.Do(<span class="string">&quot;set&quot;</span>, <span class="string">&quot;itcast&quot;</span>, <span class="string">&quot;itheima&quot;</span>)</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 3. 类型断言类函数. ---- 确定成具体的数据类型</span></span><br><span class="line">	r, e := redis.String(reply, err)</span><br><span class="line"></span><br><span class="line">	fmt.Println(r, e)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
     <link itemprop="mainEntityOfPage" href="http://www.jaly.xyz/2021/B63TYY/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -223,7 +553,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2021-08-16 11:05:11" itemprop="dateModified" datetime="2021-08-16T11:05:11+08:00">2021-08-16</time>
+        <time title="修改时间：2021-08-16 14:29:34" itemprop="dateModified" datetime="2021-08-16T14:29:34+08:00">2021-08-16</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -241,14 +571,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>7.1k</span>
+      <span>7.3k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>6 分钟</span>
+      <span>7 分钟</span>
     </span>
 </div>
 
@@ -270,7 +600,7 @@
 </li>
 <li><p>优点：</p>
 <ul>
-<li>SQL有可能 比较复杂。（Oracle — 子查询 – 嵌套）ORM 操作数据库，不需要使用 SQL</li>
+<li>SQL有可能 比较复杂。（子查询 – 嵌套）ORM 操作数据库，不需要使用 SQL</li>
 <li>不同开发者，书写的 SQL 语句执行效率不同。</li>
 </ul>
 </li>
@@ -320,7 +650,7 @@
 <li><p>```go<br>– 默认， grom框架创建好的MySQL数据库连接 conn ，就是一个连接池的句柄。<br>conn, err := gorm.Open(“mysql”, “root:123456@tcp(127.0.0.1:3306)/test”)</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">2. 初始化全局变量， 接收句柄</span><br><span class="line"></span><br><span class="line">   ```go</span><br><span class="line">   // 创建全局连接池句柄</span><br><span class="line">   var GlobalConn *gorm.DB</span><br><span class="line">   </span><br><span class="line">   GlobalConn = conn</span><br></pre></td></tr></table></figure></li>
 <li><p>修改连接池初始属性</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 初始数</span></span><br><span class="line">GlobalConn.DB().SetMaxIdleConns(<span class="number">10</span>)</span><br><span class="line"><span class="comment">// 最大数</span></span><br><span class="line">GlobalConn.DB().SetMaxOpenConns(<span class="number">100</span>)</span><br></pre></td></tr></table></figure></li>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 表示设置最大的可空闲连接数，该函数的作用就是保持等待连接操作状态的连接数，这个主要就是避免操作过程中频繁的获取连接，释放连接。默认情况下会保持的连接数量为2.就是说会有两个连接一直保持，不释放，等待需要使用的用户使用。</span></span><br><span class="line">GlobalConn.DB().SetMaxIdleConns(<span class="number">10</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 表示最大的连接数，这个我们不设置默认就是不限制，可以无限创建连接，问题就在数据库本身有瓶颈，无限创建，会损耗性能。所以我们要根据我们自己的数据库瓶颈情况来进行相关的设置。当出现连接数超出了我们设定的数量时候，后面的用户等待超时时间之前，有连接释放就会自动获得操作的权限，否则返回连接超时。</span></span><br><span class="line">GlobalConn.DB().SetMaxOpenConns(<span class="number">100</span>)</span><br></pre></td></tr></table></figure></li>
 <li><p>使用连接池句柄</p>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">--- 对比redis连接池：不需要使用 Get() 方法，取一条连接。</span><br><span class="line"><span class="comment">// 不要复数表名</span></span><br><span class="line">GlobalConn.SingularTable(<span class="literal">true</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 借助 gorm 创建数据库表.</span></span><br><span class="line">fmt.Println(GlobalConn.AutoMigrate(<span class="built_in">new</span>(Student)).Error)</span><br></pre></td></tr></table></figure></li>
 </ol>
@@ -512,10 +842,16 @@ fmt.Println(GlobalConn.Save(&amp;stu).Error)
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2021-06-17 10:43:13 / 修改时间：22:38:31" itemprop="dateCreated datePublished" datetime="2021-06-17T10:43:13+08:00">2021-06-17</time>
+      <time title="创建时间：2021-06-17 10:43:13" itemprop="dateCreated datePublished" datetime="2021-06-17T10:43:13+08:00">2021-06-17</time>
     </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2021-08-16 11:36:22" itemprop="dateModified" datetime="2021-08-16T11:36:22+08:00">2021-08-16</time>
+      </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-folder"></i>
@@ -597,13 +933,13 @@ fmt.Println(GlobalConn.Save(&amp;stu).Error)
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="站点总字数">7k</span>
+    <span title="站点总字数">13k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">7 分钟</span>
+    <span title="站点阅读时长">11 分钟</span>
   </span>
 </div>
 
